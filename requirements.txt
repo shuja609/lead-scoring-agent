@@ -1,0 +1,21 @@
+# Core Dependencies
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# LangGraph (AI Agent Framework)
+langgraph>=0.1.0
+
+# Machine Learning (prioritize pre-built wheels)
+scikit-learn
+pandas
+numpy
+
+# Data Generation
+faker>=20.0.0
+
+# Development Dependencies
+pytest>=7.4.0
+httpx>=0.24.0
+python-dotenv>=1.0.0
