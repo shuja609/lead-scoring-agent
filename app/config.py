@@ -5,6 +5,7 @@ Centralized configuration using pydantic-settings
 
 from pydantic_settings import BaseSettings
 from pathlib import Path
+import os
 
 
 class Settings(BaseSettings):
@@ -16,7 +17,7 @@ class Settings(BaseSettings):
     
     # API Configuration
     api_host: str = "0.0.0.0"
-    api_port: int = 8000
+    api_port: int = int(os.getenv("PORT", "8000"))
     api_title: str = "Lead Scoring Agent"
     api_version: str = "1.0.0"
     api_description: str = "Autonomous AI agent for lead conversion prediction"

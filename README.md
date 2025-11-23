@@ -448,9 +448,54 @@ Academic project for learning purposes.
 
 ---
 
+## 🚂 Deployment on Railway
+
+### Quick Deploy
+
+1. **Push to GitHub**
+```bash
+git add .
+git commit -m "Add Railway deployment config"
+git push origin main
+```
+
+2. **Deploy on Railway**
+   - Go to [Railway](https://railway.app/)
+   - Click "New Project" → "Deploy from GitHub repo"
+   - Select your `lead-scoring-agent` repository
+   - Railway will automatically detect the configuration
+
+3. **Environment Variables** (Optional)
+   - Set in Railway dashboard if you need to override defaults:
+   - `ENV=production`
+   - `DEBUG=False`
+   - `LOG_LEVEL=INFO`
+
+### Configuration Files
+
+The project includes:
+- **`Procfile`** - Process file for web dyno
+- **`railway.json`** - Railway-specific configuration
+- **`nixpacks.toml`** - Nixpacks build configuration
+
+### Post-Deployment
+
+After deployment, Railway will provide a URL like:
+```
+https://your-app.railway.app
+```
+
+Access your API documentation at:
+```
+https://your-app.railway.app/docs
+```
+
+---
+
 **All Phases Status:** ✅ Complete (Phases 1-3)  
 **Current Version:** 1.0  
-**Last Updated:** November 22, 2025
+**Last Updated:** November 23, 2025
+
 
 
 ---
