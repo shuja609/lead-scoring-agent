@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from app.config import settings
 from app.database import db
 from app.data_generator import SyntheticDataGenerator
+from app.model import train_initial_model
 
 
 def main():
@@ -61,6 +62,16 @@ def main():
         print()
     except Exception as e:
         print(f"   ✗ Database verification failed: {e}")
+        return False
+    
+    # Step 5: Train initial ML model
+    print("🤖 Training initial ML model...")
+    try:
+        trainer = train_initial_model(save_to_db=True)
+        print(f"   ✓ Model trained and saved to database")
+        print()
+    except Exception as e:
+        print(f"   ✗ Model training failed: {e}")
         return False
     
     print("=" * 60)
