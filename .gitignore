@@ -52,3 +52,7 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db
+
+PRESENTATION.md
+PROJECT_REPORT.md
+PROJECT_REPORT_CONDENSED.md

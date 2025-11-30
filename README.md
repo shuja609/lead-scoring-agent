@@ -1,7 +1,8 @@
 # Lead Scoring Agent
 
 **Version:** 1.0  
-**Status:** Phase 3 Complete ✅
+**Status:** Phase 3 Complete ✅  
+**Deployed URL:** https://lead-scoring-agent-production.up.railway.app/
 
 An autonomous AI agent that evaluates incoming leads and predicts their conversion likelihood using machine learning. Features adaptive learning with automatic model retraining based on feedback.
 
@@ -469,6 +470,201 @@ git push origin main
    - Set in Railway dashboard if you need to override defaults:
    - `ENV=production`
    - `DEBUG=False`
+   - Feedback count tracking
+   - Last retraining timestamp
+   - Ready-for-retraining indicator
+
+4. **Manual Retraining Endpoint**
+   - POST /retrain for on-demand retraining
+   - Returns detailed status and results
+   - Validates feedback threshold
+
+### 🎯 All Acceptance Criteria Met
+
+**Phase 1:**
+- [x] Database tables created successfully
+- [x] All endpoints return 200 status
+- [x] Synthetic data validates against schema
+- [x] Data persisted to SQLite
+
+**Phase 2:**
+- [x] Feature engineering pipeline working
+- [x] Logistic Regression model trained
+- [x] AUC Score ≥ 0.75 (achieved 0.9986)
+- [x] LangGraph workflow implemented
+- [x] Response time < 3 seconds
+
+**Phase 3:**
+- [x] Feedback correctly stored with lead scores
+- [x] Retraining triggers at 50+ samples
+- [x] New model deployed if accuracy improves
+- [x] Metrics accurately reflect system state
+
+---
+
+## ⚙️ Configuration
+
+Create a `.env` file (or use `.env.example`) to customize settings:
+
+```env
+# Environment Configuration
+ENV=development
+DEBUG=True
+
+# API Configuration
+API_HOST=0.0.0.0
+API_PORT=8000
+
+# Database Configuration
+DATABASE_PATH=./data/lead_scoring.db
+
+# Model Configuration
+MODEL_VERSION=1.0
+RETRAINING_THRESHOLD=50
+ACCURACY_IMPROVEMENT_THRESHOLD=0.02
+```
+
+---
+
+## 🧪 Testing
+
+### Automated Test Suites
+
+Run comprehensive test suites for each phase:
+
+**Phase 1 Tests:**
+```bash
+python test_phase1.py
+```
+
+**Phase 2 Tests:**
+```bash
+python test_phase2.py
+```
+
+**Phase 3 Tests:**
+```bash
+python test_phase3.py
+```
+
+### Manual API Testing
+
+Test endpoints using curl or the Swagger UI:
+
+**Test /health:**
+```bash
+curl http://localhost:8000/health
+```
+
+**Test /info:**
+```bash
+curl http://localhost:8000/info
+```
+
+**Test /score:**
+```bash
+curl -X POST http://localhost:8000/score \
+  -H "Content-Type: application/json" \
+  -d '{
+    "lead_id": "TEST-001",
+    "age": 35,
+    "location": "New York",
+    "industry": "Technology",
+    "email_opens": 15,
+    "website_visits": 10,
+    "content_downloads": 5,
+    "days_since_contact": 7,
+    "lead_source": "Webinar",
+    "actual_outcome": true
+  }'
+```
+
+**Test /retrain (Phase 3):**
+```bash
+curl -X POST http://localhost:8000/retrain
+```
+
+---
+
+## 🎓 Key Features
+
+### Intelligent Lead Scoring
+- **ML-Powered Predictions:** Logistic Regression model with 0.9986 AUC
+- **37 Engineered Features:** Numeric, categorical, and derived features
+- **Risk Categorization:** Automatic high/medium/low classification
+
+### Adaptive Learning
+- **Automatic Retraining:** Triggers at 50+ feedback samples
+- **Smart Deployment:** Only deploys if model improves by 2%+
+- **Version Management:** Automatic version tracking (1.0, 1.1, etc.)
+- **Background Processing:** Non-blocking retraining execution
+
+### Production Ready
+- **FastAPI Framework:** High-performance async API
+- **SQLite Persistence:** Reliable data storage with versioning
+- **LangGraph Workflow:** 6-state orchestration pipeline
+- **Comprehensive Testing:** Phase 1, 2, and 3 test suites
+- **API Documentation:** Auto-generated Swagger UI
+
+---
+
+## 📝 License
+
+Academic project for learning purposes.
+
+---
+
+## 👥 Team
+
+- **Saad Khan**
+- **Shuja Uddin**
+- **Javeria Irfan**
+- **Supervisor:** Dr. Behjat Zuhaira
+
+---
+
+## 📊 Performance Metrics
+
+- **Model AUC Score:** 0.9986 (Target: ≥ 0.75)
+- **Precision @ Top 20%:** 1.0
+- **Recall @ Top 20%:** 0.5
+- **API Response Time:** 2.3s average (Target: < 3s)
+- **Leads Scored:** 76+
+- **Feedback Samples:** 52+
+- **Training Samples:** 1000
+
+---
+
+## 🔄 Development Workflow
+
+1. **Phase 1:** Foundation and API skeleton ✅
+2. **Phase 2:** ML model integration and LangGraph workflow ✅
+3. **Phase 3:** Adaptive learning and automatic retraining ✅
+4. **Phase 4:** Integration & polish (upcoming)
+
+---
+
+## 🚂 Deployment on Railway
+
+### Quick Deploy
+
+1. **Push to GitHub**
+```bash
+git add .
+git commit -m "Add Railway deployment config"
+git push origin main
+```
+
+2. **Deploy on Railway**
+   - Go to [Railway](https://railway.app/)
+   - Click "New Project" → "Deploy from GitHub repo"
+   - Select your `lead-scoring-agent` repository
+   - Railway will automatically detect the configuration
+
+3. **Environment Variables** (Optional)
+   - Set in Railway dashboard if you need to override defaults:
+   - `ENV=production`
+   - `DEBUG=False`
    - `LOG_LEVEL=INFO`
 
 ### Configuration Files
@@ -480,14 +676,14 @@ The project includes:
 
 ### Post-Deployment
 
-After deployment, Railway will provide a URL like:
+The application is live at:
 ```
-https://your-app.railway.app
+https://lead-scoring-agent-production.up.railway.app/
 ```
 
-Access your API documentation at:
+Access the API documentation at:
 ```
-https://your-app.railway.app/docs
+https://lead-scoring-agent-production.up.railway.app/docs
 ```
 
 ---
