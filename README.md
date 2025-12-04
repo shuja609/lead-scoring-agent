@@ -1,4 +1,4 @@
-# Lead Scoring Agent
+# Lead Scoring Agent 
 
 **Version:** 1.0  
 **Status:** Phase 3 Complete ✅  
